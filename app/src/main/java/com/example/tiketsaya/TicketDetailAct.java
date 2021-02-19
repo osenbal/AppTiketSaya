@@ -7,23 +7,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
-public class HomeAct extends AppCompatActivity {
+public class TicketDetailAct extends AppCompatActivity {
 
-    LinearLayout btn_tiket_pisa;
+
+    LinearLayout btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_ticket_detail);
 
-        btn_tiket_pisa = findViewById(R.id.btn_tiket_pisa);
+        btn_back = findViewById(R.id.btn_back);
 
-        btn_tiket_pisa.setOnClickListener(new View.OnClickListener() {
+        btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
-                startActivity(gototiketpisa);
+                Intent backtodashboard = new Intent(TicketDetailAct.this,HomeAct.class);
+                startActivity(backtodashboard);
             }
         });
     }
