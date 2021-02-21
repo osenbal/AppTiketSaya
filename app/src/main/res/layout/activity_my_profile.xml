@@ -234,7 +234,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_view_ticket"
+        android:id="@+id/btn_edit_profile"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="24dp"
@@ -251,7 +251,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
-        android:id="@+id/btn_mydasboard"
+        android:id="@+id/btn_sign_out"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="24dp"
@@ -265,6 +265,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_view_ticket" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
