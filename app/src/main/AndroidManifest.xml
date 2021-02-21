@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.myStyle.NoActionBar">
-        <activity android:name=".TicketDetailAct"></activity>
+        <activity android:name=".MyTicketDetailAct"></activity>
+        <activity android:name=".MyProfileAct" />
+        <activity android:name=".SuccessBuyTicketAct" />
+        <activity android:name=".TicketCheckoutAct" />
+        <activity android:name=".TicketDetailAct" />
         <activity android:name=".HomeAct" />
         <activity android:name=".SuccessRegisterAct" />
         <activity android:name=".RegisterTwoAct" />
