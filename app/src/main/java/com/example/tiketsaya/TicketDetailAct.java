@@ -34,8 +34,9 @@ public class TicketDetailAct extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent backtodashboard = new Intent(TicketDetailAct.this,HomeAct.class);
-                startActivity(backtodashboard);
+                onBackPressed();
+//                Intent backtodashboard = new Intent(TicketDetailAct.this,HomeAct.class);
+//                startActivity(backtodashboard);
             }
         });
     }

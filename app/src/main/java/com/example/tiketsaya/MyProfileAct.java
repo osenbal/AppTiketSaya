@@ -13,7 +13,7 @@ import com.github.florent37.shapeofview.shapes.CircleView;
 public class MyProfileAct extends AppCompatActivity {
 
     LinearLayout item_my_ticket;
-    Button btn_edit_profile;
+    Button btn_edit_profile, btn_signout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,15 @@ public class MyProfileAct extends AppCompatActivity {
 
         item_my_ticket = findViewById(R.id.item_my_ticket);
         btn_edit_profile = findViewById(R.id.btn_edit_profile);
+        btn_signout = findViewById(R.id.btn_signout);
+
+        btn_signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signout = new Intent(MyProfileAct.this,SignAct.class);
+                startActivity(signout);
+            }
+        });
 
         btn_edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
