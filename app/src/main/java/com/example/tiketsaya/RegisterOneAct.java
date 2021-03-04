@@ -27,7 +27,7 @@ public class RegisterOneAct extends AppCompatActivity {
     Button btn_continue;
     EditText username, password, email_address;
 
-    DatabaseReference reference, reference_username;
+    DatabaseReference reference, reference_username, reference_data;
 
     String USERNAME_KEY = "usernamekey";
     String username_key = "";
@@ -49,62 +49,97 @@ public class RegisterOneAct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                final String Ausername = username.getText().toString();
+                final String Apassword = password.getText().toString();
+                final String Aemail_address = email_address.getText().toString();
+
                 //Ubah state menjadi loading
                 btn_continue.setEnabled(false);
                 btn_continue.setText("Loading ...");
 
-                // mengambil username pada database
-                reference_username = FirebaseDatabase.getInstance().getReference().child("Users").child(username.getText().toString());
-                reference_username.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()){
-                            Toast.makeText(getApplicationContext(), "Username Sudah tersedia !", Toast.LENGTH_SHORT).show();
-
-                            //Ubah state menjadi active
+                if (Ausername.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Username Require !", Toast.LENGTH_SHORT).show();
+                    //Ubah state menjadi loading
+                    btn_continue.setEnabled(true);
+                    btn_continue.setText("SIGN IN");
+                }
+                else {
+                    if(Apassword.isEmpty()){
+                        Toast.makeText(getApplicationContext(), "Password Require !", Toast.LENGTH_SHORT).show();
+                        //Ubah state menjadi loading
+                        btn_continue.setEnabled(true);
+                        btn_continue.setText("SIGN IN");
+                    } else {
+                        if (Aemail_address.isEmpty()){
+                            Toast.makeText(getApplicationContext(), "Email Require !", Toast.LENGTH_SHORT).show();
+                            //Ubah state menjadi loading
                             btn_continue.setEnabled(true);
-                            btn_continue.setText("CONTINUE");
+                            btn_continue.setText("SIGN IN");
+                        } else {
+                            if (Aemail_address.isEmpty()){
+                                Toast.makeText(getApplicationContext(), "Email Require !", Toast.LENGTH_SHORT).show();
+                                //Ubah state menjadi loading
+                                btn_continue.setEnabled(true);
+                                btn_continue.setText("SIGN IN");
+                            } else {
+                                // mengambil username pada database
+                                reference_username = FirebaseDatabase.getInstance().getReference().child("Users").child(username.getText().toString());
+                                reference_username.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()){
+                                            Toast.makeText(getApplicationContext(), "Username Sudah tersedia !", Toast.LENGTH_SHORT).show();
 
-                        }
-                        else {
-                            // menyimpan data pada local storage (hp)
-                            SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(username_key, username.getText().toString());
-                            editor.apply();
+                                            //Ubah state menjadi active
+                                            btn_continue.setEnabled(true);
+                                            btn_continue.setText("CONTINUE");
 
-                            //Toast.makeText(getApplicationContext(), "Username " + username.getText().toString(), Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+                                            // menyimpan data pada local storage (hp)
+                                            SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putString(username_key, username.getText().toString());
+                                            editor.apply();
 
-                            //Menyimpan ke database
-                            reference = FirebaseDatabase.getInstance()
-                                    .getReference().child("Users").child(username.getText().toString());
-                            reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    dataSnapshot.getRef().child("username").setValue(username.getText().toString());
-                                    dataSnapshot.getRef().child("password").setValue(password.getText().toString());
-                                    dataSnapshot.getRef().child("email_address").setValue(email_address.getText().toString());
-                                    dataSnapshot.getRef().child("user_balance").setValue(0);
-                                }
+                                            //Toast.makeText(getApplicationContext(), "Username " + username.getText().toString(), Toast.LENGTH_SHORT).show();
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            //Menyimpan ke database
+                                            reference = FirebaseDatabase.getInstance()
+                                                    .getReference().child("Users").child(username.getText().toString());
+                                            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    dataSnapshot.getRef().child("username").setValue(username.getText().toString());
+                                                    dataSnapshot.getRef().child("password").setValue(password.getText().toString());
+                                                    dataSnapshot.getRef().child("email_address").setValue(email_address.getText().toString());
+                                                    dataSnapshot.getRef().child("user_balance").setValue(0);
+                                                }
 
-                                }
-                            });
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            // berpindah ke act selanjutnya
-                            Intent gotoregistertwo = new Intent(RegisterOneAct.this,RegisterTwoAct.class);
-                            startActivity(gotoregistertwo);
+                                                }
+                                            });
+
+                                            // berpindah ke act selanjutnya
+                                            Intent gotoregistertwo = new Intent(RegisterOneAct.this,RegisterTwoAct.class);
+                                            startActivity(gotoregistertwo);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Toast.makeText(getApplicationContext(), "Warning Database Error !", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+
                         }
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getApplicationContext(), "Warning Database Error !", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                }
 
             }
         });

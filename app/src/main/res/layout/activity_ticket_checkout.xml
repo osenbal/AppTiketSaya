@@ -93,19 +93,18 @@
                 android:layout_marginTop="6dp">
 
                 <TextView
-                    android:id="@+id/photo_spot_ticket"
+                    android:id="@+id/nama_wisata"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mregular"
-                    android:text="Menara Pisa"
                     android:textColor="@color/blackPrimary"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/lokasi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mlight"
-                    android:text="Pisa City, Italy"
                     android:textColor="@color/grayPrimary"
                     android:textSize="12sp" />
 
@@ -148,12 +147,11 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/short_desc_ticket"
+            android:id="@+id/ketentuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/mlight"
             android:lineSpacingExtra="8dp"
-            android:text="Anak yang berumur lebih dari 3 tahun wajib membeli tiket"
             android:textSize="16sp" />
 
     </LinearLayout>

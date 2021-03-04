@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/photo_home_user"
+            android:id="@+id/photo_profile"
             android:layout_width="95dp"
             android:layout_height="95dp"
             android:background="@drawable/icon_nopic" />
@@ -49,12 +49,11 @@
 
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/nama_lengkap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/mmedium"
-        android:text="Iqbal Maulana"
         android:textColor="#FFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,18 +62,17 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/bio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/mlight"
-        android:text="Networking"
         android:textColor="#FFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/nama_lengkap" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -92,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7">
+        app:layout_constraintTop_toBottomOf="@+id/bio">
 
 
         <TextView

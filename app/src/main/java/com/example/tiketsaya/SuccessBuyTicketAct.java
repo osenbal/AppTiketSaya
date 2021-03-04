@@ -51,5 +51,13 @@ public class SuccessBuyTicketAct extends AppCompatActivity {
                 startActivity(gotodashboard);
             }
         });
+
+        btn_view_ticket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoprofile = new Intent(SuccessBuyTicketAct.this, MyProfileAct.class);
+                startActivity(gotoprofile);
+            }
+        });
     }
 }

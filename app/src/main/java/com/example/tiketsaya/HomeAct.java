@@ -26,7 +26,9 @@ import java.util.Objects;
 
 public class HomeAct extends AppCompatActivity {
 
-    LinearLayout btn_tiket_pisa;
+    LinearLayout btn_tiket_pisa, btn_tiket_torri,
+            btn_tiket_pagoda, btn_tiket_candi,
+            btn_tiket_sphinx, btn_tiket_monas;
     CircleView btn_to_profile;
     ImageView photo_home_user;
     TextView nama_lengkap, bio, user_balance;
@@ -48,6 +50,11 @@ public class HomeAct extends AppCompatActivity {
         getUsernameLocal();
 
         btn_tiket_pisa = findViewById(R.id.btn_tiket_pisa);
+        btn_tiket_torri = findViewById(R.id.btn_tiket_torri);
+        btn_tiket_pagoda = findViewById(R.id.btn_tiket_pagoda);
+        btn_tiket_candi = findViewById(R.id.btn_tiket_candi);
+        btn_tiket_sphinx = findViewById(R.id.btn_tiket_sphinx);
+        btn_tiket_monas = findViewById(R.id.btn_tiket_monas);
         btn_to_profile = findViewById(R.id.btn_to_profile);
         photo_home_user = findViewById(R.id.photo_home_user);
         nama_lengkap = findViewById(R.id.nama_lengkap);
@@ -63,7 +70,9 @@ public class HomeAct extends AppCompatActivity {
                 nama_lengkap.setText(snapshot.child("nama_lengkap").getValue().toString());
                 bio.setText(snapshot.child("bio").getValue().toString());
                 user_balance.setText("Rp " + snapshot.child("user_balance").getValue().toString());
-                Picasso.with(HomeAct.this).load(Objects.requireNonNull(snapshot.child("url_photo_profile").getValue()).toString()).centerCrop().fit().into(photo_home_user);
+                Picasso.with(HomeAct.this).load(Objects.requireNonNull
+                        (snapshot.child("url_photo_profile").getValue())
+                        .toString()).centerCrop().fit().into(photo_home_user);
 
             }
 
@@ -80,14 +89,68 @@ public class HomeAct extends AppCompatActivity {
             }
         });
 
+        // Button Tiket Pissa
         btn_tiket_pisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                // Meletakan data pada Intent
+                gototiketpisa.putExtra("jenis_tiket", "Pisa");
                 startActivity(gototiketpisa);
             }
         });
+        // Button Tiket Torri
+        btn_tiket_torri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                // Meletakan data pada Intent
+                gototiketpisa.putExtra("jenis_tiket", "Torri");
+                startActivity(gototiketpisa);
+            }
+        });
+        // Button Tiket Pagoda
+        btn_tiket_pagoda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                // Meletakan data pada Intent
+                gototiketpisa.putExtra("jenis_tiket", "Pagoda");
+                startActivity(gototiketpisa);
+            }
+        });
+        // Button Tiket Candi
+        btn_tiket_candi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                // Meletakan data pada Intent
+                gototiketpisa.putExtra("jenis_tiket", "Candi");
+                startActivity(gototiketpisa);
+            }
+        });
+        // Button Tiket Sphinx
+        btn_tiket_sphinx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                // Meletakan data pada Intent
+                gototiketpisa.putExtra("jenis_tiket", "Sphinx");
+                startActivity(gototiketpisa);
+            }
+        });
+        // Button Tiket Monas
+        btn_tiket_monas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                // Meletakan data pada Intent
+                gototiketpisa.putExtra("jenis_tiket", "Monas");
+                startActivity(gototiketpisa);
+            }
+        });
+
+        //END FUNCTION
     }
 
     public void getUsernameLocal(){

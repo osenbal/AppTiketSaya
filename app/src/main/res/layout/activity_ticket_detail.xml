@@ -8,11 +8,10 @@
     tools:context=".TicketDetailAct">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/header_ticket_detail"
         android:layout_width="match_parent"
         android:layout_height="210dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/bgheader_pisa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,12 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/mregular"
-        android:text="Menara Pisa"
         android:textColor="#FFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+        app:layout_constraintTop_toTopOf="@+id/header_ticket_detail" />
 
     <TextView
         android:id="@+id/location_ticket"
@@ -37,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/mlight"
-        android:text="Pisa, Italy"
         android:textAlignment="center"
         android:textColor="#FFF"
         android:textSize="20sp"
@@ -109,7 +106,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mregular"
-                    android:text="3 Photo Spot"
                     android:textColor="@color/blackPrimary"
                     android:textSize="16sp" />
 
@@ -146,7 +142,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mregular"
-                    android:text="WiFi Available"
                     android:textColor="@color/blackPrimary"
                     android:textSize="16sp" />
 
@@ -183,7 +178,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mregular"
-                    android:text="17 Festivals"
                     android:textColor="@color/blackPrimary"
                     android:textSize="16sp" />
 
@@ -204,7 +198,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/mlight"
             android:lineSpacingExtra="8dp"
-            android:text="The leaning of the Tower of Pisa \ncomes into the story in 1173, when \nconstruction began."
             android:textSize="16sp" />
 
     </LinearLayout>
