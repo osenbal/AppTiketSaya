@@ -2,6 +2,8 @@ package com.example.tiketsaya;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MyProfileAct extends AppCompatActivity {
@@ -32,11 +35,15 @@ public class MyProfileAct extends AppCompatActivity {
     TextView nama_lengkap, bio;
     ImageView photo_profile;
 
-    DatabaseReference reference;
+    DatabaseReference reference, reference2;
 
     String USERNAME_KEY = "usernamekey";
     String username_key = "";
     String username_key_new = "";
+
+    RecyclerView myticket_place;
+    ArrayList<MyTicket> list;
+    TicketAdapter ticketAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,10 @@ public class MyProfileAct extends AppCompatActivity {
         nama_lengkap = findViewById(R.id.nama_lengkap);
         bio = findViewById(R.id.bio);
         photo_profile = findViewById(R.id.photo_profile);
+
+        myticket_place = findViewById(R.id.myticket_place);
+        myticket_place.setLayoutManager(new LinearLayoutManager(this));
+        list = new ArrayList<MyTicket>();
 
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(username_key_new);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -85,13 +96,24 @@ public class MyProfileAct extends AppCompatActivity {
             }
         });
 
-        item_my_ticket.setOnClickListener(new View.OnClickListener() {
+        reference2 = FirebaseDatabase.getInstance().getReference().child("MyTickets").child(username_key_new);
+        reference2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                Intent gotomyticketdetail = new Intent(MyProfileAct.this,MyTicketDetailAct.class);
-                startActivity(gotomyticketdetail);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot1: snapshot.getChildren()){
+                    MyTicket p = dataSnapshot1.getValue(MyTicket.class);
+                    list.add(p);
+                }
+                ticketAdapter = new TicketAdapter(MyProfileAct.this, list);
+                myticket_place.setAdapter(ticketAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
 
     }
     public void getUsernameLocal(){

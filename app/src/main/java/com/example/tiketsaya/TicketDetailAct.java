@@ -67,8 +67,10 @@ public class TicketDetailAct extends AppCompatActivity {
                 location_ticket.setText(snapshot.child("lokasi").getValue().toString());
                 photo_spot_ticket.setText(snapshot.child("is_photo_spot").getValue().toString());
                 wifi_ticket.setText(snapshot.child("is_wifi").getValue().toString());
-                festival_ticket.setText(snapshot.child("is_festival").getValue().toString());
                 short_desc_ticket.setText(snapshot.child("short_desc").getValue().toString());
+                festival_ticket.setText(snapshot.child("is_festival").getValue().toString());
+
+
                 Picasso.with(TicketDetailAct.this).load(Objects.requireNonNull
                         (snapshot.child("url_thumbnail").getValue())
                         .toString()).centerCrop().fit().into(header_ticket_detail);
