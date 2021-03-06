@@ -30,7 +30,7 @@ import java.util.Objects;
 public class MyProfileAct extends AppCompatActivity {
 
     LinearLayout item_my_ticket;
-    Button btn_edit_profile, btn_signout;
+    Button btn_edit_profile, btn_signout, btn_back_home;
 
     TextView nama_lengkap, bio;
     ImageView photo_profile;
@@ -54,6 +54,7 @@ public class MyProfileAct extends AppCompatActivity {
 
         item_my_ticket = findViewById(R.id.item_my_ticket);
         btn_edit_profile = findViewById(R.id.btn_edit_profile);
+        btn_back_home = findViewById(R.id.btn_back_home);
         btn_signout = findViewById(R.id.btn_signout);
         nama_lengkap = findViewById(R.id.nama_lengkap);
         bio = findViewById(R.id.bio);
@@ -77,14 +78,6 @@ public class MyProfileAct extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        btn_signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signout = new Intent(MyProfileAct.this,SignAct.class);
-                startActivity(signout);
             }
         });
 
@@ -114,7 +107,30 @@ public class MyProfileAct extends AppCompatActivity {
             }
         });
 
+        btn_back_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gobacktohome = new Intent(MyProfileAct.this, HomeAct.class);
+                startActivity(gobacktohome);
+            }
+        });
 
+        btn_signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Menghapus isi username di local
+                SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(username_key, null);
+                editor.apply();
+
+                // Berpindah Activity
+                Intent signout = new Intent(MyProfileAct.this,SignAct.class);
+                startActivity(signout);
+                finish();
+            }
+        });
     }
     public void getUsernameLocal(){
         SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);

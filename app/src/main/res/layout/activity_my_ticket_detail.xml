@@ -58,48 +58,30 @@
                 android:src="@drawable/ic_ticket_buy" />
 
             <LinearLayout
-                android:layout_width="120dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="6dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/photo_spot_ticket"
+                    android:id="@+id/xnama_wisata"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mregular"
-                    android:text="Menara Pisa"
                     android:textColor="@color/blackPrimary"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/xlokasi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mlight"
-                    android:text="Pisa City, Italy"
                     android:textColor="@color/grayPrimary"
                     android:textSize="12sp" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="17dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:fontFamily="@font/mlight"
-                    android:text="2 Ticket"
-                    android:textColor="@color/bluePrimary"
-                    android:textSize="16sp" />
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -126,10 +108,10 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/xdate_wisata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/mlight"
-                android:text="February 21 2021"
                 android:textColor="@color/grayPrimary"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -149,10 +131,10 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/xtime_wisata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/mlight"
-                android:text="10AM to 12PM"
                 android:textColor="@color/grayPrimary"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -172,11 +154,11 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/xketentuan"
                 android:lineSpacingExtra="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/mlight"
-                android:text="Anak yang berumur lebih dari 3 tahun wajib membeli tiket untuk masuk ke dalam landmark"
                 android:textColor="@color/grayPrimary"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -236,7 +218,7 @@
                 android:id="@+id/btn_continue"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="@drawable/bg_btn_blue_primary"
+                android:background="@drawable/bg_btn_green_primary"
                 android:fontFamily="@font/mmedium"
                 android:text="REFUND NOW"
                 android:textColor="#FFF"

@@ -42,7 +42,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 Intent gotomyticketdetails = new Intent(context, MyTicketDetailAct.class);
-                gotomyticketdetails.putExtra("xnama_wisata", getNamaWisata);
+                gotomyticketdetails.putExtra("nama_wisata", getNamaWisata);
                 context.startActivity(gotomyticketdetails);
             }
         });
