@@ -31,7 +31,6 @@ public class MyProfileAct extends AppCompatActivity {
 
     LinearLayout item_my_ticket;
     Button btn_edit_profile, btn_signout, btn_back_home;
-
     TextView nama_lengkap, bio;
     ImageView photo_profile;
 
@@ -43,15 +42,18 @@ public class MyProfileAct extends AppCompatActivity {
 
     RecyclerView myticket_place;
     ArrayList<MyTicket> list;
-    TicketAdapter ticketAdapter;
+    TicketAdapter_place ticketAdapter_place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
+        // Get local data username
         getUsernameLocal();
 
+
+        // ====================================================================
         item_my_ticket = findViewById(R.id.item_my_ticket);
         btn_edit_profile = findViewById(R.id.btn_edit_profile);
         btn_back_home = findViewById(R.id.btn_back_home);
@@ -59,11 +61,17 @@ public class MyProfileAct extends AppCompatActivity {
         nama_lengkap = findViewById(R.id.nama_lengkap);
         bio = findViewById(R.id.bio);
         photo_profile = findViewById(R.id.photo_profile);
-
         myticket_place = findViewById(R.id.myticket_place);
+        // =====================================================================
+
+
+        // ---------------------------------------------------------------------
         myticket_place.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<MyTicket>();
+        //----------------------------------------------------------------------
 
+
+        // ============= MENGAMBIL DATA DARI FIREBASE =====================================================
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(username_key_new);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -80,15 +88,10 @@ public class MyProfileAct extends AppCompatActivity {
 
             }
         });
+        // ===================================================================================================
 
-        btn_edit_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent gotoeditprofile = new Intent(MyProfileAct.this,EditProfileAct.class);
-                startActivity(gotoeditprofile);
-            }
-        });
 
+        // =====================================================================================================
         reference2 = FirebaseDatabase.getInstance().getReference().child("MyTickets").child(username_key_new);
         reference2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -96,9 +99,10 @@ public class MyProfileAct extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot1: snapshot.getChildren()){
                     MyTicket p = dataSnapshot1.getValue(MyTicket.class);
                     list.add(p);
+
                 }
-                ticketAdapter = new TicketAdapter(MyProfileAct.this, list);
-                myticket_place.setAdapter(ticketAdapter);
+                ticketAdapter_place = new TicketAdapter_place(MyProfileAct.this, list);
+                myticket_place.setAdapter(ticketAdapter_place);
             }
 
             @Override
@@ -106,7 +110,21 @@ public class MyProfileAct extends AppCompatActivity {
 
             }
         });
+        // =======================================================================================================
 
+
+        // =======================================================================================================
+        btn_edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoeditprofile = new Intent(MyProfileAct.this,EditProfileAct.class);
+                startActivity(gotoeditprofile);
+            }
+        });
+        //=========================================================================================================
+
+
+        // =====================================================================================================
         btn_back_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,11 +132,13 @@ public class MyProfileAct extends AppCompatActivity {
                 startActivity(gobacktohome);
             }
         });
+        // ======================================================================================================
 
+
+        // ======================================================================================================
         btn_signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // Menghapus isi username di local
                 SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -132,8 +152,14 @@ public class MyProfileAct extends AppCompatActivity {
             }
         });
     }
+
+
+    // Membuat fungsi untuk mengambil data dari local =======================================
     public void getUsernameLocal(){
         SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
         username_key_new = sharedPreferences.getString(username_key, "");
     }
+    // =======================================================================================
+
+
 }

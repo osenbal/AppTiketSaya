@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView app_logo;
     TextView subtittle;
 
-
     String USERNAME_KEY = "usernamekey";
     String username_key = "";
     String username_key_new = "";
@@ -29,21 +28,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //load animation
+        // ============ Get username local ==============
+        getUsernameLocal();
+        // ==============================================
+
+
+        // ================================ load animation ====================================
         splash_anim = AnimationUtils.loadAnimation(this, R.anim.splash_anim);
         btt = AnimationUtils.loadAnimation(this, R.anim.btt);
+        // ====================================================================================
 
+
+        // ====================================================================================
         //load element
         app_logo = findViewById(R.id.app_logo);
         subtittle = findViewById(R.id.subtittle);
+        // ====================================================================================
 
+
+        // ====================================================================================
         // run animation
         app_logo.startAnimation(splash_anim);
         subtittle.startAnimation(btt);
-
-        getUsernameLocal();
+        // ====================================================================================
     }
+
     public void getUsernameLocal(){
+        // ======================================================================================================
         SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
         username_key_new = sharedPreferences.getString(username_key, "");
         if (username_key_new.isEmpty()){
@@ -71,5 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, 2000); //2000 ms = 2 detik
         }
+        // =======================================================================================================
     }
 }

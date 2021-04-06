@@ -33,15 +33,19 @@ public class SignAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 
+        // ==================================================================
         btn_new_account = findViewById(R.id.btn_new_account);
         btn_sign_in = findViewById(R.id.btn_sign_in);
         xusername = findViewById(R.id.xusername);
         xpassword = findViewById(R.id.xpassword);
+        // ==================================================================
 
+
+        // =====================================================================================================================================
         btn_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Ubah state menjadi loading
+                // Ubah state menjadi loading
                 btn_sign_in.setEnabled(false);
                 btn_sign_in.setText("Loading ...");
 
@@ -50,20 +54,20 @@ public class SignAct extends AppCompatActivity {
 
                 if(username.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Username Kosong !", Toast.LENGTH_SHORT).show();
-                    //Ubah state menjadi SIGN IN
+                    // Ubah state menjadi SIGN IN
                     btn_sign_in.setEnabled(true);
                     btn_sign_in.setText("SIGN IN");
                 }
                 else {
                     if (password.isEmpty()){
                         Toast.makeText(getApplicationContext(), "Password Kosong !", Toast.LENGTH_SHORT).show();
-                        //Ubah state menjadi SIGN IN
+                        // Ubah state menjadi SIGN IN
                         btn_sign_in.setEnabled(true);
                         btn_sign_in.setText("SIGN IN");
                     } else {
                         if (password.isEmpty()){
                             Toast.makeText(getApplicationContext(), "Password Kosong !", Toast.LENGTH_SHORT).show();
-                            //Ubah state menjadi SIGN IN
+                            // Ubah state menjadi SIGN IN
                             btn_sign_in.setEnabled(true);
                             btn_sign_in.setText("SIGN IN");
                         } else {
@@ -74,7 +78,7 @@ public class SignAct extends AppCompatActivity {
                                     if (snapshot.exists()){
                                         //Toast.makeText(getApplicationContext(), "Username Valid :)", Toast.LENGTH_LONG).show();
 
-                                        //ambil data password dari firebase
+                                        // Ambil data password dari firebase
                                         String passwordFromFirebase = snapshot.child("password").getValue().toString();
 
                                         // Validasi password denggan password firebase
@@ -86,16 +90,15 @@ public class SignAct extends AppCompatActivity {
                                             editor.putString(username_key, xusername.getText().toString());
                                             editor.apply();
 
-                                            // berpindah activity
+                                            // Berpindah activity
                                             Intent gotohomeact = new Intent(SignAct.this,HomeAct.class);
                                             startActivity(gotohomeact);
                                         }
                                         else {
                                             Toast.makeText(getApplicationContext(), "Password Salah !", Toast.LENGTH_LONG).show();
-                                            //Ubah state menjadi SIGN IN
+                                            // Ubah state menjadi SIGN IN
                                             btn_sign_in.setEnabled(true);
                                             btn_sign_in.setText("SIGN IN");
-
                                         }
                                     }
                                     else{
@@ -115,7 +118,10 @@ public class SignAct extends AppCompatActivity {
                 }
             }
         });
+        // ================================================================================================================================================
 
+
+        // =====================================================================================================
         btn_new_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +129,7 @@ public class SignAct extends AppCompatActivity {
                 startActivity(gotoregisterone);
             }
         });
+        // ======================================================================================================
 
 
     }

@@ -201,7 +201,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/mmedium"
-                android:text="Rp. 900.000"
                 android:textColor="@color/bluePrimary"
                 android:textSize="16sp"/>
         </LinearLayout>
@@ -255,7 +254,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="4"
+        android:weightSum="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LinearLayout3">
@@ -284,9 +283,10 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:orientation="vertical"
-            android:layout_marginLeft="24dp">
+            android:layout_marginLeft="16dp">
+
 
             <Button
                 android:id="@+id/btn_buy_ticket"
@@ -300,6 +300,27 @@
 
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp">
+
+
+            <Button
+                android:id="@+id/btn_add_cart"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/bg_btn_green_primary"
+                android:fontFamily="@font/mmedium"
+                android:text="+ CART"
+                android:textColor="#FFF"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
 

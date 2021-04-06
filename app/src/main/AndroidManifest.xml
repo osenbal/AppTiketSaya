@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.myStyle.NoActionBar">
-        <activity android:name=".EditProfileAct"></activity>
+        <activity android:name=".ProfileTickets"></activity>
+        <activity android:name=".TicketCart" />
+        <activity android:name=".activity_cart" />
+        <activity android:name=".EditProfileAct" />
         <activity android:name=".MyTicketDetailAct" />
         <activity android:name=".MyProfileAct" />
         <activity android:name=".SuccessBuyTicketAct" />

@@ -23,21 +23,29 @@ public class GetStartedAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_started);
 
-        // Load Animations
+        // ======================== Load Animations =========================
         ttb = AnimationUtils.loadAnimation(this,R.anim.ttb);
         btt = AnimationUtils.loadAnimation(this, R.anim.btt);
+        // ==================================================================
 
-        // Load element
+
+        // ========================= Load element ===========================
         btn_sign_in = findViewById(R.id.btn_sign_in);
         btn_new_account_create = findViewById(R.id.btn_new_account_create);
         emblem_app = findViewById(R.id.emblem_app);
         intro_app = findViewById(R.id.intro_app);
+        // ==================================================================
 
+
+        // ================= Load and Run Animmations =================
         emblem_app.startAnimation(ttb);
         intro_app.startAnimation(ttb);
         btn_sign_in.startAnimation(btt);
         btn_new_account_create.startAnimation(btt);
+        // ============================================================
 
+
+        // =====================================================================================================
         btn_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +61,7 @@ public class GetStartedAct extends AppCompatActivity {
                 startActivity(gotoregisterone);
             }
         });
+        // ======================================================================================================
 
     }
 }

@@ -28,19 +28,23 @@ public class MyTicketDetailAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_ticket_detail);
 
+        // ==================================================
         btn_back = findViewById(R.id.btn_back);
         xnama_wisata = findViewById(R.id.xnama_wisata);
         xlokasi = findViewById(R.id.xlokasi);
         xdate_wisata = findViewById(R.id.xdate_wisata);
         xtime_wisata = findViewById(R.id.xtime_wisata);
         xketentuan = findViewById(R.id.xketentuan);
+        // ==================================================
 
-        // Mengambil data dari Intent
+
+        // ====================== Mengambil data dari Intent =================
         Bundle bundle = getIntent().getExtras();
         String nama_wisata_baru = bundle.getString("nama_wisata");
-        //
+        // ===================================================================
 
-        // Mengambil data pada database
+
+        // ====================== Mengambil data pada database ================================================
         reference = FirebaseDatabase.getInstance().getReference().child("Wisata").child(nama_wisata_baru);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -52,19 +56,22 @@ public class MyTicketDetailAct extends AppCompatActivity {
                 xketentuan.setText(snapshot.child("ketentuan").getValue().toString());
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+        // =====================================================================================================
 
+
+        // =====================================================================
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+        // =====================================================================
 
     }
 }

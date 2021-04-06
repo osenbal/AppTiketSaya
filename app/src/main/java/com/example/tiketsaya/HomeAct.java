@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,23 +33,31 @@ public class HomeAct extends AppCompatActivity {
     CircleView btn_to_profile;
     ImageView photo_home_user;
     TextView nama_lengkap, bio, user_balance;
-
+    Button btn_cart;
 
     DatabaseReference reference;
-
+    Integer value_uang = 0;
     String USERNAME_KEY = "usernamekey";
     String username_key = "";
     String username_key_new = "";
 
+    // ================= Untuk mengkonversi text jadi Rupiah =================
+    Locale localeID = new Locale("in", "ID");
+    NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+    // =======================================================================
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // mengambil data username
+        // =========== Mengambil data username ===========
         getUsernameLocal();
+        // ===============================================
 
+
+        // ================ Mengambil Element ====================
+        btn_cart = findViewById(R.id.btn_cart);
         btn_tiket_pisa = findViewById(R.id.btn_tiket_pisa);
         btn_tiket_torri = findViewById(R.id.btn_tiket_torri);
         btn_tiket_pagoda = findViewById(R.id.btn_tiket_pagoda);
@@ -60,19 +69,23 @@ public class HomeAct extends AppCompatActivity {
         nama_lengkap = findViewById(R.id.nama_lengkap);
         user_balance = findViewById(R.id.user_balance);
         bio = findViewById(R.id.bio);
+        // ========================================================
 
 
+        // ==========================================================================================================
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(username_key_new);
-
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 nama_lengkap.setText(snapshot.child("nama_lengkap").getValue().toString());
                 bio.setText(snapshot.child("bio").getValue().toString());
-                user_balance.setText("Rp " + snapshot.child("user_balance").getValue().toString());
+                //user_balance.setText("Rp " + snapshot.child("user_balance").getValue().toString());
+                value_uang = Integer.valueOf(snapshot.child("user_balance").getValue().toString());
                 Picasso.with(HomeAct.this).load(Objects.requireNonNull
                         (snapshot.child("url_photo_profile").getValue())
                         .toString()).centerCrop().fit().into(photo_home_user);
+
+                user_balance.setText(formatRupiah.format((double)value_uang));
 
             }
 
@@ -81,6 +94,11 @@ public class HomeAct extends AppCompatActivity {
 
             }
         });
+        // =============================================================================================================
+
+
+        // =============================================================================================================
+        // ------------------------------------- Button to profile -----------------------------------------
         btn_to_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +106,9 @@ public class HomeAct extends AppCompatActivity {
                 startActivity(gotoprofile);
             }
         });
+        // -------------------------------------------------------------------------------------------------
 
-        // Button Tiket Pissa
+        // ------------------------------------- Button Tiket Pissa ----------------------------------------
         btn_tiket_pisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,58 +118,77 @@ public class HomeAct extends AppCompatActivity {
                 startActivity(gototiketpisa);
             }
         });
-        // Button Tiket Torri
+        // ---------------------------------------------------------------------------------------------------
+
+        // ------------------------------------- Button Tiket Torri ------------------------------------------
         btn_tiket_torri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                Intent gototikettorri = new Intent(HomeAct.this,TicketDetailAct.class);
                 // Meletakan data pada Intent
-                gototiketpisa.putExtra("jenis_tiket", "Torri");
-                startActivity(gototiketpisa);
+                gototikettorri.putExtra("jenis_tiket", "Torri");
+                startActivity(gototikettorri);
             }
         });
-        // Button Tiket Pagoda
+        // ---------------------------------------------------------------------------------------------------
+
+        // ------------------------------------- Button Tiket Pagoda -----------------------------------------
         btn_tiket_pagoda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                Intent gototiketpagoda = new Intent(HomeAct.this,TicketDetailAct.class);
                 // Meletakan data pada Intent
-                gototiketpisa.putExtra("jenis_tiket", "Pagoda");
-                startActivity(gototiketpisa);
+                gototiketpagoda.putExtra("jenis_tiket", "Pagoda");
+                startActivity(gototiketpagoda);
             }
         });
-        // Button Tiket Candi
+        // ---------------------------------------------------------------------------------------------------
+
+        // ------------------------------------- Button Tiket Candi ------------------------------------------
         btn_tiket_candi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                Intent gototiketcandi = new Intent(HomeAct.this,TicketDetailAct.class);
                 // Meletakan data pada Intent
-                gototiketpisa.putExtra("jenis_tiket", "Candi");
-                startActivity(gototiketpisa);
+                gototiketcandi.putExtra("jenis_tiket", "Candi");
+                startActivity(gototiketcandi);
             }
         });
-        // Button Tiket Sphinx
+        // ---------------------------------------------------------------------------------------------------
+
+        // ------------------------------------ Button Tiket Sphinx ------------------------------------------
         btn_tiket_sphinx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                Intent gototiketsphinx = new Intent(HomeAct.this,TicketDetailAct.class);
                 // Meletakan data pada Intent
-                gototiketpisa.putExtra("jenis_tiket", "Sphinx");
-                startActivity(gototiketpisa);
+                gototiketsphinx.putExtra("jenis_tiket", "Sphinx");
+                startActivity(gototiketsphinx);
             }
         });
-        // Button Tiket Monas
+        // ---------------------------------------------------------------------------------------------------
+
+        // ------------------------------------- Button Tiket Monas ------------------------------------------
         btn_tiket_monas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gototiketpisa = new Intent(HomeAct.this,TicketDetailAct.class);
+                Intent gototiketmonas = new Intent(HomeAct.this,TicketDetailAct.class);
                 // Meletakan data pada Intent
-                gototiketpisa.putExtra("jenis_tiket", "Monas");
-                startActivity(gototiketpisa);
+                gototiketmonas.putExtra("jenis_tiket", "Monas");
+                startActivity(gototiketmonas);
             }
         });
+        // ---------------------------------------------------------------------------------------------------
 
-        //END FUNCTION
+        // =================================== Button to Cart ====================================
+        btn_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotocart = new Intent(HomeAct.this,activity_cart.class);
+                startActivity(gotocart);
+            }
+        });
+        // =======================================================================================
     }
 
     public void getUsernameLocal(){

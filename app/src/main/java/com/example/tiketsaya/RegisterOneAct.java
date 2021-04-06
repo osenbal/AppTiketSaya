@@ -37,14 +37,16 @@ public class RegisterOneAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_one);
 
-        // Meload Element berdasarkan ID
+        // ======== Meload Element berdasarkan ID ============
         btn_back = findViewById(R.id.btn_back);
         btn_continue  = findViewById(R.id.btn_continue);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         email_address = findViewById(R.id.email_address);
+        // ===================================================
 
 
+        // ============================================================================================================================================================
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,36 +55,41 @@ public class RegisterOneAct extends AppCompatActivity {
                 final String Apassword = password.getText().toString();
                 final String Aemail_address = email_address.getText().toString();
 
-                //Ubah state menjadi loading
+                // ------- Ubah Button state menjadi loading -------
                 btn_continue.setEnabled(false);
                 btn_continue.setText("Loading ...");
+                // -------------------------------------------------
 
                 if (Ausername.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Username Require !", Toast.LENGTH_SHORT).show();
-                    //Ubah state menjadi loading
+                    // --- Ubah state Button menjadi Continue ---
                     btn_continue.setEnabled(true);
-                    btn_continue.setText("SIGN IN");
+                    btn_continue.setText("CONTINUE");
+                    // ------------------------------------------
                 }
                 else {
                     if(Apassword.isEmpty()){
                         Toast.makeText(getApplicationContext(), "Password Require !", Toast.LENGTH_SHORT).show();
-                        //Ubah state menjadi loading
+                        // --- Ubah state menjadi Continue ---
                         btn_continue.setEnabled(true);
-                        btn_continue.setText("SIGN IN");
+                        btn_continue.setText("CONTINUE");
+                        // -----------------------------------
                     } else {
                         if (Aemail_address.isEmpty()){
                             Toast.makeText(getApplicationContext(), "Email Require !", Toast.LENGTH_SHORT).show();
-                            //Ubah state menjadi loading
+                            // --- Ubah state menjadi Continue ---
                             btn_continue.setEnabled(true);
-                            btn_continue.setText("SIGN IN");
+                            btn_continue.setText("CONTINUE");
+                            // -----------------------------------
                         } else {
                             if (Aemail_address.isEmpty()){
                                 Toast.makeText(getApplicationContext(), "Email Require !", Toast.LENGTH_SHORT).show();
-                                //Ubah state menjadi loading
+                                // --- Ubah state menjadi Continue ---
                                 btn_continue.setEnabled(true);
-                                btn_continue.setText("SIGN IN");
+                                btn_continue.setText("CONTINUE");
+                                // -----------------------------------
                             } else {
-                                // mengambil username pada database
+                                // ------------------------------------- Mengambil username pada database -----------------------------------------------------------
                                 reference_username = FirebaseDatabase.getInstance().getReference().child("Users").child(username.getText().toString());
                                 reference_username.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -90,21 +97,23 @@ public class RegisterOneAct extends AppCompatActivity {
                                         if (snapshot.exists()){
                                             Toast.makeText(getApplicationContext(), "Username Sudah tersedia !", Toast.LENGTH_SHORT).show();
 
-                                            //Ubah state menjadi active
+                                            // --- Ubah state menjadi Continue ---
                                             btn_continue.setEnabled(true);
                                             btn_continue.setText("CONTINUE");
-
+                                            // -----------------------------------
                                         }
                                         else {
-                                            // menyimpan data pada local storage (hp)
+
+                                            // ---------------------------------------- Menyimpan data pada local storage (hp) -------------------------------------
                                             SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
                                             editor.putString(username_key, username.getText().toString());
                                             editor.apply();
+                                            // ---------------------------------------------------------------------------------------------------------------------
 
                                             //Toast.makeText(getApplicationContext(), "Username " + username.getText().toString(), Toast.LENGTH_SHORT).show();
 
-                                            //Menyimpan ke database
+                                            // ---------------------------------- Menyimpan ke database -----------------------------------------------
                                             reference = FirebaseDatabase.getInstance()
                                                     .getReference().child("Users").child(username.getText().toString());
                                             reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -121,11 +130,15 @@ public class RegisterOneAct extends AppCompatActivity {
 
                                                 }
                                             });
+                                            // ----------------------------------------------------------------------------------------------------------
 
-                                            // berpindah ke act selanjutnya
+
+                                            // ------------------------------- Berpindah ke act selanjutnya -----------------------------------------
                                             Intent gotoregistertwo = new Intent(RegisterOneAct.this,RegisterTwoAct.class);
                                             startActivity(gotoregistertwo);
+                                            // ------------------------------------------------------------------------------------------------------
                                         }
+
                                     }
 
                                     @Override
@@ -133,17 +146,22 @@ public class RegisterOneAct extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Warning Database Error !", Toast.LENGTH_SHORT).show();
                                     }
                                 });
+
                             }
 
-
                         }
+
                     }
 
                 }
 
             }
-        });
 
+        });
+        // =================================================================================================================================================================
+
+
+        // ===================================================================================
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,7 +170,7 @@ public class RegisterOneAct extends AppCompatActivity {
 //                startActivity(backtosignin);
             }
         });
+        // ===================================================================================
 
     }
-
 }

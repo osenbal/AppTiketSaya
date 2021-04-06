@@ -36,4 +36,5 @@ public class MyTicket {
     public void setJumlah_tiket(String jumlah_tiket) {
         this.jumlah_tiket = jumlah_tiket;
     }
+
 }

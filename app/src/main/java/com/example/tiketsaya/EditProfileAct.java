@@ -35,9 +35,7 @@ public class EditProfileAct extends AppCompatActivity {
 
     LinearLayout btn_back;
     Button btn_save, btn_add_new_photo;
-
     EditText xnama_lengkap, xbio, xusername, xpassword, xemail_address;
-
     ImageView photo_edit_profile;
 
     Uri photo_location;
@@ -55,8 +53,12 @@ public class EditProfileAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
+        // ====================================
         getUsernameLocal();
+        // ====================================
 
+
+        // ===============================================================================
         btn_back = findViewById(R.id.btn_back);
         xnama_lengkap = findViewById(R.id.xnama_lengkap);
         xbio = findViewById(R.id.xbio);
@@ -65,9 +67,11 @@ public class EditProfileAct extends AppCompatActivity {
         xemail_address = findViewById(R.id.xemail_address);
         btn_save = findViewById(R.id.btn_save);
         btn_add_new_photo = findViewById(R.id.btn_add_new_photo);
-
         photo_edit_profile = findViewById(R.id.photo_edit_profile);
+        // ================================================================================
 
+
+        // ==========================================================================================================
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(username_key_new);
         storage = FirebaseStorage.getInstance().getReference().child("Photousers").child(username_key_new);
 
@@ -84,21 +88,25 @@ public class EditProfileAct extends AppCompatActivity {
                         .toString()).centerCrop().fit().into(photo_edit_profile);
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+        // =============================================================================================================
 
+
+        // ==========================================================================================================================================================
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //Ubah state menjadi loading
+                // ---- Ubah state menjadi loading ----
                 btn_save.setEnabled(false);
                 btn_save.setText("Loading ...");
+                // ------------------------------------
 
+                // -------------------------------------------------------------------------------------------------------
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -107,6 +115,9 @@ public class EditProfileAct extends AppCompatActivity {
                         dataSnapshot.getRef().child("email_address").setValue(xemail_address.getText().toString());
                         dataSnapshot.getRef().child("nama_lengkap").setValue(xnama_lengkap.getText().toString());
                         dataSnapshot.getRef().child("bio").setValue(xbio.getText().toString());
+
+                        Intent goback = new Intent(EditProfileAct.this, MyProfileAct.class);
+                        startActivity(goback);
                     }
 
                     @Override
@@ -114,7 +125,9 @@ public class EditProfileAct extends AppCompatActivity {
 
                     }
                 });
+                // ---------------------------------------------------------------------------------------------------------
 
+                // ------------------------------------------------------------------------------------------------------------------------------------
                 if (photo_location != null){
                     final StorageReference storageReference1 =
                             storage.child(System.currentTimeMillis() + "." +
@@ -134,7 +147,7 @@ public class EditProfileAct extends AppCompatActivity {
                                     }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Uri> task) {
-                                            // switch activity
+                                            // Switch activity
                                             // Berpindah activity
                                             Intent gobacktomyprofile = new Intent(EditProfileAct.this, MyProfileAct.class);
                                             startActivity(gobacktomyprofile);
@@ -143,10 +156,14 @@ public class EditProfileAct extends AppCompatActivity {
                                 }
                             });
                 }
+                // --------------------------------------------------------------------------------------------------------------------------------------
 
             }
         });
+        // =========================================================================================================================================================
 
+
+        // ==============================================================================
         btn_add_new_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,8 +177,10 @@ public class EditProfileAct extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+        // ================================================================================
     }
+
+
 
     String getFileExtension(Uri uri){
         ContentResolver contentResolver = getContentResolver();

@@ -10,6 +10,7 @@
 
     <color name="bluePrimary">#203DD1</color>
     <color name="grayPrimary">#8D8D8D</color>
+    <color name="graySecondary">#F3F3F3</color>
     <color name="blueSecondary">#2595F5</color>
     <color name="blackPrimary">#21272C</color>
 

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         tools:context=".GetStartedAct"
         android:background="@drawable/bg_overlay_getstarted"
-        android:paddingBottom="120dp">
+        android:paddingBottom="240dp">
 
         <ImageView
             android:id="@+id/emblem_app"
@@ -44,17 +44,12 @@
             app:layout_constraintTop_toBottomOf="@+id/emblem_app" />
 
         <Button
+            style="@style/btn_blue_primary"
             android:id="@+id/btn_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
             android:layout_marginStart="48dp"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="48dp"
-            android:background="@drawable/bg_btn_blue_primary"
-            android:fontFamily="@font/mmedium"
             android:text="@string/signin"
-            android:textColor="#FFF"
-            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
