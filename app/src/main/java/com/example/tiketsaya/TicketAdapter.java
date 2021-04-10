@@ -126,8 +126,8 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotomyticketdetails = new Intent(context, MyTicketDetailAct.class);
-                gotomyticketdetails.putExtra("nama_wisata", getNamaWisata);
+                Intent gotomyticketdetails = new Intent(context, TicketDetailAct.class);
+                gotomyticketdetails.putExtra("jenis_tiket", getNamaWisata);
 
                 context.startActivity(gotomyticketdetails);
             }

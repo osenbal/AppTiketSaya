@@ -80,7 +80,7 @@
         android:gravity="center"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="15dp">
         <Button
             android:id="@+id/btn_cancel"
